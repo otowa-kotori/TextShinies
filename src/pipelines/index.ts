@@ -38,7 +38,7 @@ export function getPipeline(id: string): Pipeline | undefined {
 }
 
 // 执行流水线
-export function executePipeline(pipelineId: string, inputText: string): PipelineResult {
+export function executePipeline(pipelineId: string, inputText: string, context: Context): PipelineResult {
   const pipeline = getPipeline(pipelineId);
   if (!pipeline) {
     return {
@@ -48,7 +48,6 @@ export function executePipeline(pipelineId: string, inputText: string): Pipeline
     };
   }
 
-  const context: Context = {};
   let currentText = inputText;
 
   try {

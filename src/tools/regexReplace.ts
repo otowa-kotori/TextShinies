@@ -1,4 +1,5 @@
 import type { Tool } from '../types';
+import { getDefaultValues } from './utils';
 
 export const regexReplace: Tool = {
   name: 'regexReplace',
@@ -21,7 +22,8 @@ export const regexReplace: Tool = {
     return text.length > 0 && parameters?.replacements?.length > 0;
   },
   process: (context, text, parameters = {}) => {
-    const { replacements = [], flags = 'g' } = parameters;
+    const defaults = getDefaultValues(regexReplace.parameters);
+    const { replacements, flags } = { ...defaults, ...parameters };
     
     if (!replacements.length) {
       return text;

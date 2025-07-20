@@ -1,4 +1,5 @@
 import type { Tool } from '../types';
+import { getDefaultValues } from './utils';
 
 export const fullwidthToHalfwidth: Tool = {
   name: 'fullwidthToHalfwidth',
@@ -21,10 +22,8 @@ export const fullwidthToHalfwidth: Tool = {
     return text.length > 0;
   },
   process: (context, text, parameters = {}) => {
-    const { 
-      toLowerCase = false, 
-      convertCommonPunctuation = false, 
-    } = parameters;
+    const defaults = getDefaultValues(fullwidthToHalfwidth.parameters);
+    const { toLowerCase, convertCommonPunctuation } = { ...defaults, ...parameters };
     
     let result = text;
     

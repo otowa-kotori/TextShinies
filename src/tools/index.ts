@@ -2,6 +2,7 @@ import type { Tool } from '../types';
 import { trimWhitespace } from './trimWhitespace';
 import { regexReplace } from './regexReplace';
 import { fullwidthToHalfwidth } from './fullwidthToHalfwidth';
+import { mergeSplitLines } from './mergeSplitLines';
 
 // 工具注册表
 const tools: Map<string, Tool> = new Map();
@@ -25,3 +26,4 @@ export function getAllTools(): Tool[] {
 registerTool(trimWhitespace);
 registerTool(regexReplace);
 registerTool(fullwidthToHalfwidth);
+registerTool(mergeSplitLines);

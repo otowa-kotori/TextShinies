@@ -1,6 +1,7 @@
 // 上下文环境，整个流水线共享
 export interface Context {
   [key: string]: any;
+  measureText?: (text: string) => number;
 }
 
 // 工具参数定义

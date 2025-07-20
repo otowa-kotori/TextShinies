@@ -1,5 +1,8 @@
 <template>
   <div class="text-processor">
+    <!-- 不可见的 canvas 用于测量文本宽度 -->
+    <canvas ref="measureCanvas" style="position: absolute; left: -9999px; top: -9999px;"></canvas>
+    
     <h1>文本处理工具</h1>
     
     <div class="pipeline-selector">
@@ -51,13 +54,14 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { getPipelines, executePipeline } from '../pipelines';
-import type { Pipeline } from '../types';
+import type { Pipeline, Context } from '../types';
 
 const inputText = ref('');
 const outputText = ref('');
 const selectedPipeline = ref('');
 const pipelines = ref<Pipeline[]>([]);
 const error = ref('');
+const measureCanvas = ref<HTMLCanvasElement>();
 
 onMounted(() => {
   pipelines.value = getPipelines();
@@ -73,7 +77,29 @@ const processText = () => {
     return;
   }
 
-  const result = executePipeline(selectedPipeline.value, inputText.value);
+  // 使用模板中的 canvas 进行文本宽度测量
+  const canvas = measureCanvas.value;
+  if (!canvas) {
+    error.value = 'Canvas 元素未找到';
+    return;
+  }
+  
+  const ctx = canvas.getContext('2d');
+  if (!ctx) {
+    error.value = '无法获取 canvas 上下文';
+    return;
+  }
+  
+  // 设置字体样式（可以根据需要调整）
+  ctx.font = '14px sans-serif';
+
+  const context: Context = {
+    measureText: (text: string) => {
+      return ctx.measureText(text).width;
+    }
+  };
+
+  const result = executePipeline(selectedPipeline.value, inputText.value, context);
   
   if (result.success) {
     outputText.value = result.output;

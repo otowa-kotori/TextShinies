@@ -1,7 +1,7 @@
 {
   "id": "example-pipeline",
   "name": "示例流水线",
-  "description": "示例流水线",
+  "description": "处理PDF复制出来的规则文本",
   "tools": [
     {
       "name": "trimWhitespace"
@@ -9,6 +9,12 @@
     {
       "name": "fullwidthToHalfwidth",
       "toLowerCase": true
+    },
+    {
+      "name": "mergeSplitLines",
+      "widthRangeRatio": 0.1,
+      "minLineCount": 3,
+      "maxWidth": 800
     }
   ]
 } 
