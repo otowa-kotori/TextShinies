@@ -3,7 +3,7 @@
     <!-- 不可见的 canvas 用于测量文本宽度 -->
     <canvas ref="measureCanvas" style="position: absolute; left: -9999px; top: -9999px;"></canvas>
     
-    <h1>文本处理工具</h1>
+    <h1>一些乱七八糟的文本处理工具</h1>
     
     <div class="pipeline-selector">
       <label for="pipeline">选择流水线：</label>
