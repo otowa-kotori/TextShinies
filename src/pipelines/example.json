@@ -1,0 +1,14 @@
+{
+  "id": "example-pipeline",
+  "name": "示例流水线",
+  "description": "示例流水线",
+  "tools": [
+    {
+      "name": "trimWhitespace"
+    },
+    {
+      "name": "fullwidthToHalfwidth",
+      "toLowerCase": true
+    }
+  ]
+} 

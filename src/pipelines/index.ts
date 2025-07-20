@@ -1,10 +1,27 @@
-import type { Pipeline, Context, PipelineResult } from '../types';
+import type { Pipeline, Context, PipelineResult, PipelineTool } from '../types';
 import { getTool } from '../tools';
-import basicPipelines from './basic.json';
+import examplePipeline from './example.json';
+
+// 转换工具配置格式：除了name之外的字段自动成为parameters
+function transformToolConfig(toolConfig: any): PipelineTool {
+  const { name, ...parameters } = toolConfig;
+  return {
+    name,
+    parameters: Object.keys(parameters).length > 0 ? parameters : undefined
+  };
+}
+
+// 转换流水线配置格式
+function transformPipelineConfig(pipelineConfig: any): Pipeline {
+  return {
+    ...pipelineConfig,
+    tools: pipelineConfig.tools.map(transformToolConfig)
+  };
+}
 
 // 合并所有流水线配置
 const allPipelines = [
-  ...basicPipelines,
+  transformPipelineConfig(examplePipeline),
 ];
 
 // 流水线存储

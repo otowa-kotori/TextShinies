@@ -62,7 +62,7 @@
                 <strong>可用参数:</strong>
                 <ul>
                   <li v-for="param in getTool(toolConfig.name)?.parameters" :key="param.name">
-                    {{ param.name }} ({{ param.type }}) - {{ param.description }}
+                    {{ param.name }} - {{ param.description }}
                     <span v-if="param.defaultValue !== undefined" class="default-value">
                       默认值: {{ formatParameterValue(param.defaultValue) }}
                     </span>
