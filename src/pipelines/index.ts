@@ -1,18 +1,9 @@
 import type { Pipeline, Context, PipelineResult } from '../types';
 import { getTool } from '../tools';
-
-// 默认流水线配置
-const defaultPipelines: Pipeline[] = [
-  {
-    id: 'basic-cleanup',
-    name: '基础清理',
-    description: '清除文本中的多余空白字符',
-    tools: ['trimWhitespace']
-  }
-];
+import pipelinesConfig from './pipelines.json';
 
 // 流水线存储
-let pipelines: Pipeline[] = [...defaultPipelines];
+let pipelines: Pipeline[] = [...pipelinesConfig];
 
 // 获取所有流水线
 export function getPipelines(): Pipeline[] {
@@ -39,20 +30,23 @@ export function executePipeline(pipelineId: string, inputText: string): Pipeline
   let currentText = inputText;
 
   try {
-    for (const toolName of pipeline.tools) {
-      const tool = getTool(toolName);
+    for (const toolConfig of pipeline.tools) {
+      const tool = getTool(toolConfig.name);
       if (!tool) {
         return {
           success: false,
           output: '',
-          error: `工具 ${toolName} 不存在`
+          error: `工具 ${toolConfig.name} 不存在`
         };
       }
 
+      // 合并默认参数和配置参数
+      const parameters = { ...toolConfig.parameters };
+      
       // 检查处理条件
-      if (tool.condition(context, currentText)) {
+      if (tool.condition(context, currentText, parameters)) {
         // 执行处理
-        currentText = tool.process(context, currentText);
+        currentText = tool.process(context, currentText, parameters);
       }
     }
 

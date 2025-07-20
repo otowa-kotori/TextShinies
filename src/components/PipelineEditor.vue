@@ -35,35 +35,52 @@
         </div>
         <div v-else class="tool-items">
           <div 
-            v-for="(toolName, index) in selectedPipeline.tools" 
-            :key="toolName"
+            v-for="(toolConfig, index) in selectedPipeline.tools" 
+            :key="toolConfig.name"
             class="tool-item"
           >
             <div class="tool-header">
               <span class="tool-index">{{ index + 1 }}</span>
-              <span class="tool-name">{{ toolName }}</span>
+              <span class="tool-name">{{ toolConfig.name }}</span>
             </div>
-            <div v-if="getTool(toolName)" class="tool-details">
-              <p class="tool-description">{{ getTool(toolName)?.description }}</p>
-              <div v-if="getTool(toolName)?.parameters.length" class="tool-parameters">
-                <strong>参数:</strong>
+            <div v-if="getTool(toolConfig.name)" class="tool-details">
+              <p class="tool-description">{{ getTool(toolConfig.name)?.description }}</p>
+              
+              <!-- 工具参数配置 -->
+              <div v-if="toolConfig.parameters && Object.keys(toolConfig.parameters).length > 0" class="tool-parameters">
+                <strong>参数配置:</strong>
+                <div class="parameter-list">
+                  <div v-for="(value, key) in toolConfig.parameters" :key="key" class="parameter-item">
+                    <span class="parameter-name">{{ key }}:</span>
+                    <span class="parameter-value">{{ formatParameterValue(value) }}</span>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 工具参数定义 -->
+              <div v-if="getTool(toolConfig.name)?.parameters.length" class="tool-parameter-definitions">
+                <strong>可用参数:</strong>
                 <ul>
-                  <li v-for="param in getTool(toolName)?.parameters" :key="param.name">
+                  <li v-for="param in getTool(toolConfig.name)?.parameters" :key="param.name">
                     {{ param.name }} ({{ param.type }}) - {{ param.description }}
+                    <span v-if="param.defaultValue !== undefined" class="default-value">
+                      默认值: {{ formatParameterValue(param.defaultValue) }}
+                    </span>
                   </li>
                 </ul>
               </div>
-              <div v-if="getTool(toolName)?.dependencies.length" class="tool-dependencies">
+              
+              <div v-if="getTool(toolConfig.name)?.dependencies.length" class="tool-dependencies">
                 <strong>依赖:</strong>
                 <ul>
-                  <li v-for="dep in getTool(toolName)?.dependencies" :key="dep">
+                  <li v-for="dep in getTool(toolConfig.name)?.dependencies" :key="dep">
                     {{ dep }}
                   </li>
                 </ul>
               </div>
             </div>
             <div v-else class="tool-error">
-              工具 {{ toolName }} 不存在
+              工具 {{ toolConfig.name }} 不存在
             </div>
           </div>
         </div>
@@ -87,6 +104,16 @@ onMounted(() => {
 
 const selectPipeline = (pipeline: Pipeline) => {
   selectedPipeline.value = pipeline;
+};
+
+const formatParameterValue = (value: any): string => {
+  if (typeof value === 'string') {
+    return `"${value}"`;
+  }
+  if (typeof value === 'boolean') {
+    return value ? 'true' : 'false';
+  }
+  return String(value);
 };
 </script>
 
@@ -200,18 +227,45 @@ const selectPipeline = (pipeline: Pipeline) => {
   color: #666;
 }
 
-.tool-parameters, .tool-dependencies {
+.tool-parameters, .tool-parameter-definitions, .tool-dependencies {
   margin: 10px 0;
 }
 
-.tool-parameters ul, .tool-dependencies ul {
+.parameter-list {
+  margin: 5px 0;
+}
+
+.parameter-item {
+  display: flex;
+  margin: 2px 0;
+  padding: 2px 0;
+}
+
+.parameter-name {
+  font-weight: bold;
+  color: #495057;
+  min-width: 100px;
+}
+
+.parameter-value {
+  color: #007bff;
+  font-family: monospace;
+}
+
+.tool-parameter-definitions ul, .tool-dependencies ul {
   margin: 5px 0;
   padding-left: 20px;
 }
 
-.tool-parameters li, .tool-dependencies li {
+.tool-parameter-definitions li, .tool-dependencies li {
   margin: 2px 0;
   color: #666;
+}
+
+.default-value {
+  color: #28a745;
+  font-size: 0.9em;
+  margin-left: 10px;
 }
 
 .tool-error {

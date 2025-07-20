@@ -79,6 +79,5 @@ body {
 
 .main-content {
   background-color: white;
-  height: calc(100vh - 80px);
 }
 </style>

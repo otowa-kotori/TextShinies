@@ -1,5 +1,6 @@
 import type { Tool } from '../types';
 import { trimWhitespace } from './trimWhitespace';
+import { regexReplace } from './regexReplace';
 
 // 工具注册表
 const tools: Map<string, Tool> = new Map();
@@ -20,4 +21,5 @@ export function getAllTools(): Tool[] {
 }
 
 // 初始化默认工具
-registerTool(trimWhitespace); 
+registerTool(trimWhitespace);
+registerTool(regexReplace); 
