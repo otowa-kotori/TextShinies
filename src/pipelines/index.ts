@@ -1,9 +1,14 @@
 import type { Pipeline, Context, PipelineResult } from '../types';
 import { getTool } from '../tools';
-import pipelinesConfig from './pipelines.json';
+import basicPipelines from './basic.json';
+
+// 合并所有流水线配置
+const allPipelines = [
+  ...basicPipelines,
+];
 
 // 流水线存储
-let pipelines: Pipeline[] = [...pipelinesConfig];
+let pipelines: Pipeline[] = [...allPipelines];
 
 // 获取所有流水线
 export function getPipelines(): Pipeline[] {

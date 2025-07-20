@@ -1,0 +1,18 @@
+[
+  {
+    "id": "test-pipeline-1",
+    "name": "测试用流水线1",
+    "description": "基础文本转换测试",
+    "tools": [
+      {
+        "name": "trimWhitespace"
+      },
+      {
+        "name": "fullwidthToHalfwidth",
+        "parameters": {
+          "toLowerCase": true
+        }
+      }
+    ]
+  }
+] 

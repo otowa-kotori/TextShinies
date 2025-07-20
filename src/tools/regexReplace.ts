@@ -6,42 +6,44 @@ export const regexReplace: Tool = {
   dependencies: [],
   parameters: [
     {
-      name: 'pattern',
-      type: 'string',
-      description: '正则表达式模式',
-      defaultValue: ''
-    },
-    {
-      name: 'replacement',
-      type: 'string',
-      description: '替换文本',
-      defaultValue: ''
+      name: 'replacements',
+      description: '替换规则列表，每个规则包含pattern和replacement',
+      defaultValue: []
     },
     {
       name: 'flags',
-      type: 'string',
       description: '正则表达式标志（如 g, i, m）',
       defaultValue: 'g'
     }
   ],
   condition: (context, text, parameters) => {
-    // 文本不为空且有正则模式时执行
-    return text.length > 0 && parameters?.pattern;
+    // 文本不为空且有替换规则时执行
+    return text.length > 0 && parameters?.replacements?.length > 0;
   },
   process: (context, text, parameters = {}) => {
-    const { pattern, replacement = '', flags = 'g' } = parameters;
+    const { replacements = [], flags = 'g' } = parameters;
     
-    if (!pattern) {
+    if (!replacements.length) {
       return text;
     }
 
-    try {
-      const regex = new RegExp(pattern, flags);
-      return text.replace(regex, replacement);
-    } catch (error) {
-      // 如果正则表达式无效，返回原文本
-      console.warn('无效的正则表达式:', pattern, error);
-      return text;
+    let result = text;
+    
+    for (const rule of replacements) {
+      const [pattern, replacement] = rule;
+      
+      if (!pattern) {
+        continue;
+      }
+
+      try {
+        const regex = new RegExp(pattern, flags);
+        result = result.replace(regex, replacement);
+      } catch (error) {
+        // 如果正则表达式无效，跳过这个规则
+        console.warn('无效的正则表达式:', pattern, error);
+      }
     }
+    return result;
   }
 }; 

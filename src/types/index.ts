@@ -6,7 +6,6 @@ export interface Context {
 // 工具参数定义
 export interface ToolParameter {
   name: string;
-  type: 'string' | 'number' | 'boolean';
   description: string;
   defaultValue?: any;
 }
