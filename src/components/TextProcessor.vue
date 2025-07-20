@@ -93,13 +93,13 @@ const clearAll = () => {
 
 <style scoped>
 .text-processor {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
 }
 
 .pipeline-selector {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .pipeline-selector label {
@@ -110,16 +110,18 @@ const clearAll = () => {
 
 .pipeline-selector select {
   width: 100%;
-  padding: 8px;
+  max-width: 600px;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-size: 16px;
 }
 
 .text-areas {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 40px;
+  margin-bottom: 30px;
 }
 
 .input-area, .output-area {
@@ -134,26 +136,31 @@ const clearAll = () => {
 
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   resize: vertical;
-  font-family: monospace;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 300px;
 }
 
 .actions {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: #007bff;
   color: white;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 button:hover:not(:disabled) {

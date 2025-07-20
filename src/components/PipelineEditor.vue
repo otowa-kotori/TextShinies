@@ -92,9 +92,9 @@ const selectPipeline = (pipeline: Pipeline) => {
 
 <style scoped>
 .pipeline-editor {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
 }
 
 .pipelines-list {
@@ -103,14 +103,14 @@ const selectPipeline = (pipeline: Pipeline) => {
 
 .pipeline-items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
 }
 
 .pipeline-item {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -166,7 +166,7 @@ const selectPipeline = (pipeline: Pipeline) => {
 .tool-item {
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
+  padding: 20px;
   background-color: #f9f9f9;
 }
 

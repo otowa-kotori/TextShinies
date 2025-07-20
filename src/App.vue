@@ -51,19 +51,22 @@ body {
 
 .navigation {
   background-color: #333;
-  padding: 15px 20px;
+  padding: 20px 30px;
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navigation button {
   background: none;
   border: none;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background-color 0.2s;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .navigation button:hover {
@@ -76,6 +79,6 @@ body {
 
 .main-content {
   background-color: white;
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 80px);
 }
 </style>
