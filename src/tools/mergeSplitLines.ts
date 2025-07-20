@@ -2,7 +2,7 @@ import type { Tool } from '../types';
 import { getDefaultValues } from './utils';
 
 export const mergeSplitLines: Tool = {
-  name: 'mergeSplitLines',
+  name: 'MergeSplitLines',
   description: '合并被强制换行的文本行',
   dependencies: [],
   parameters: [
@@ -60,7 +60,7 @@ export const mergeSplitLines: Tool = {
     }
 
     console.log(`测量到 ${lineWidths.length} 行宽度在最大宽度 ${maxWidth} 以内`);
-    console.log('行宽度详情:', lineWidths.map(lw => `第${lw.index}行: ${lw.width}`));
+    //console.log('行宽度详情:', lineWidths.map(lw => `第${lw.index}行: ${lw.width}`));
 
     if (lineWidths.length < minLineCount) {
       console.log(`有效行数 ${lineWidths.length} 少于最小要求 ${minLineCount}，直接返回原文本`);
@@ -109,7 +109,7 @@ export const mergeSplitLines: Tool = {
 
     const mergeCount = shouldMerge.filter(Boolean).length;
     console.log(`标记了 ${mergeCount} 行需要合并`);
-    console.log('合并标记:', shouldMerge.map((merge, i) => `第${i}行: ${merge ? '合并' : '保留'}`));
+    // console.log('合并标记:', shouldMerge.map((merge, i) => `第${i}行: ${merge ? '合并' : '保留'}`));
 
     // 拼接连续的标记行
     const result: string[] = [];

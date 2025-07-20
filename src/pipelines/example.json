@@ -4,14 +4,14 @@
   "description": "处理PDF复制出来的规则文本",
   "tools": [
     {
-      "name": "trimWhitespace"
+      "name": "TrimWhitespace"
     },
     {
-      "name": "fullwidthToHalfwidth",
+      "name": "FullwidthToHalfwidth",
       "toLowerCase": true
     },
     {
-      "name": "mergeSplitLines",
+      "name": "MergeSplitLines",
       "widthRangeRatio": 0.1,
       "minLineCount": 3,
       "maxWidth": 800

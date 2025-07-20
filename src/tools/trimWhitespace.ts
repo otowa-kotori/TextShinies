@@ -1,7 +1,7 @@
 import type { Tool } from '../types';
 
 export const trimWhitespace: Tool = {
-  name: 'trimWhitespace',
+  name: 'TrimWhitespace',
   description: '清除行前行末的多余空白字符',
   dependencies: [],
   parameters: [],

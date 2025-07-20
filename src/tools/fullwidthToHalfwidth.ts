@@ -2,7 +2,7 @@ import type { Tool } from '../types';
 import { getDefaultValues } from './utils';
 
 export const fullwidthToHalfwidth: Tool = {
-  name: 'fullwidthToHalfwidth',
+  name: 'FullwidthToHalfwidth',
   description: '将全角字母和数字转换为半角形式',
   dependencies: [],
   parameters: [

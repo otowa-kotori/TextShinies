@@ -2,8 +2,9 @@
 import { ref } from 'vue';
 import TextProcessor from './components/TextProcessor.vue';
 import PipelineEditor from './components/PipelineEditor.vue';
+import ToolsList from './components/ToolsList.vue';
 
-const currentPage = ref<'processor' | 'editor'>('processor');
+const currentPage = ref<'processor' | 'editor' | 'tools'>('processor');
 </script>
 
 <template>
@@ -21,11 +22,18 @@ const currentPage = ref<'processor' | 'editor'>('processor');
       >
         流水线编辑
       </button>
+      <button 
+        @click="currentPage = 'tools'" 
+        :class="{ active: currentPage === 'tools' }"
+      >
+        工具列表
+      </button>
     </nav>
 
     <main class="main-content">
       <TextProcessor v-if="currentPage === 'processor'" />
       <PipelineEditor v-if="currentPage === 'editor'" />
+      <ToolsList v-if="currentPage === 'tools'" />
     </main>
   </div>
 </template>

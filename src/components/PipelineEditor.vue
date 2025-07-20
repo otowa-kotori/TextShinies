@@ -56,20 +56,7 @@
                   </div>
                 </div>
               </div>
-              
-              <!-- 工具参数定义 -->
-              <div v-if="getTool(toolConfig.name)?.parameters.length" class="tool-parameter-definitions">
-                <strong>可用参数:</strong>
-                <ul>
-                  <li v-for="param in getTool(toolConfig.name)?.parameters" :key="param.name">
-                    {{ param.name }} - {{ param.description }}
-                    <span v-if="param.defaultValue !== undefined" class="default-value">
-                      默认值: {{ formatParameterValue(param.defaultValue) }}
-                    </span>
-                  </li>
-                </ul>
-              </div>
-              
+                            
               <div v-if="getTool(toolConfig.name)?.dependencies.length" class="tool-dependencies">
                 <strong>依赖:</strong>
                 <ul>

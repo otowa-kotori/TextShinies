@@ -2,7 +2,7 @@ import type { Tool } from '../types';
 import { getDefaultValues } from './utils';
 
 export const regexReplace: Tool = {
-  name: 'regexReplace',
+  name: 'RegexReplace',
   description: '使用正则表达式替换文本内容',
   dependencies: [],
   parameters: [
