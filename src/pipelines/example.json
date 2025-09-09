@@ -1,7 +1,7 @@
 {
   "id": "example-pipeline",
-  "name": "示例流水线",
-  "description": "处理PDF复制出来的规则文本",
+  "name": "多行合并",
+  "description": "检测PDF复制出来的多行文本，自动合并成一行。",
   "tools": [
     {
       "name": "TrimWhitespace"
